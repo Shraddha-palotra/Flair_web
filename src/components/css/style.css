@@ -1,0 +1,214 @@
+/* * {
+  border: 2px solid black;
+} */
+.card-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafc;
+}
+.signup {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.signup-formCenterAlign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.signup-form {
+  margin: 20px;
+  background-color: #fff;
+  padding: 48px 60px;
+  border-radius: 5px;
+}
+.signup-form .heading-text {
+  margin-top: 30px;
+}
+
+.signup-form .form {
+  margin-top: 30px;
+}
+.custom-form-label {
+  color: #6f767e;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  display: block;
+}
+.custom-input-field {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #132330 !important;
+  background-color: var(--white);
+  border: 1px solid #c2c2c2;
+  border-radius: 5px;
+  position: relative;
+}
+.custom-input-field::placeholder {
+  color: #6f767e !important;
+}
+
+.custom-form-control {
+  display: block;
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6f767e !important;
+  background-color: var(--white);
+  border: 1px solid #c2c2c2;
+  border-radius: 5px;
+  position: relative;
+}
+
+.custom-input-field::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  /* background-image: url('/assets/icons/arrow.svg');
+     background-repeat: no-repeat; */
+  background-size: cover;
+  position: absolute;
+  top: 30%;
+  right: -30%;
+  /* transform: translateY(-50%); */
+  transition: 0.5s ease;
+}
+.form-label {
+  margin-bottom: 0.1rem !important;
+}
+
+.custom-btn {
+  padding: 15px;
+  background-color: #007bff;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: white;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.custom-btn:hover {
+  background-color: #589dfd;
+}
+
+.custom-btn1 {
+  padding: 10px;
+  background-color: #f0f3f8;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: var(--white);
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+.custom-btn1:hover {
+  background-color: #dde7f8;
+}
+
+.btn {
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 20px;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: var(--white);
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+.btn:hover {
+  border-color: #066eff;
+}
+
+/* for country code */
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group select.custom-select-field {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px 0 0 4px; /* Rounded corners on the left */
+  background-color: #f8f9fa;
+}
+
+.input-group input.custom-input-field {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-left: none; /* Remove border between select and input */
+  border-radius: 0 4px 4px 0; /* Rounded corners on the right */
+  background-color: #fff;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.custom-input-field {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px 0 0 4px; /* Rounded corners on the left */
+}
+
+.verify-btn {
+  padding: 10px 20px;
+  border: 1px solid #ced4da;
+  border-left: none;
+  border-radius: 0 4px 4px 0; /* Rounded corners on the right */
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.verify-btn:hover {
+  background-color: #589dfd;
+}
+
+/* Optional: Adjust the input field's border radius when there's an error */
+/* .custom-input-field:focus {
+  border-color: #80bdff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+} */
+
+
+
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  font-size: 14px;
+}
