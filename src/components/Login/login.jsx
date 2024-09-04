@@ -12,7 +12,7 @@ function login() {
                 <div className="signup-form">
                   <div className="heading-text text-center">
                     <h1>Supper Admin</h1>
-                    <p>LogIn <Link to="/">Signun</Link></p>
+                    <p>LogIn <Link to="/">Signup</Link></p>
                   </div>
                   <div className="form">
                     <div className="row g-2">
@@ -27,7 +27,7 @@ function login() {
                             id="email"
                             placeholder="Enter Email"
                           />
-                          <button className="verify-btn">Verify</button>
+                          {/* <button className="verify-btn">Send</button> */}
                         </div>
                       </div>
                       <div className="col-md-12">
@@ -44,7 +44,7 @@ function login() {
                             id="email-otp"
                             placeholder="Enter Email Otp"
                           />
-                          <button className="verify-btn">Verify</button>
+                          {/* <button className="verify-btn">Verify</button> */}
                         </div>
                       </div>
                       <div className="col-md-12">
@@ -64,6 +64,11 @@ function login() {
                       </div>
                       <div className="col-md-12 mt-4 mb-3">
                         <button className="custom-btn">LogIn</button>
+                      </div>
+                      <div>
+                        <p>
+                          <Link to="/header">Header</Link>
+                        </p>
                       </div>
                     </div>
                   </div>

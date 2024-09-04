@@ -42,7 +42,7 @@ function SignUp() {
                           id="email"
                           placeholder="Enter Email"
                         />
-                        <button className="verify-btn">Verify</button>
+                        <button className="verify-btn">Send</button>
                       </div>
                       </div>
                       <div className="col-md-12">
@@ -79,7 +79,7 @@ function SignUp() {
                             id="number"
                             placeholder="Enter Phone Number"
                           />
-                          <button className="verify-btn">Verify</button>
+                          <button className="verify-btn">Send</button>
                         </div>
                       </div>
                       <div className="col-md-12">

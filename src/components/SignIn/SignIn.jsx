@@ -31,7 +31,7 @@ function SignIn() {
                             id="email"
                             placeholder="Enter Email"
                           />
-                          <button className="verify-btn">Verify</button>
+                          <button className="verify-btn">Send</button>
                         </div>
                       </div>
                       <div className="col-md-12">
