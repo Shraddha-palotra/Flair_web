@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+This is for ngrok 
+https://dd6a-122-168-120-123.ngrok-free.app 
+ngrok is fastest way to put anything on the internet with single cammand 
+
+if we face network error some time then we will put wifi IP address instead of localhost http

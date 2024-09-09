@@ -1,9 +1,56 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../assets/icon/google.svg";
 import facebook from "../assets/icon/facebook.svg";
+import axios from "axios";
 
 function SignIn() {
+  const [email,setEmail] = useState("");
+  const [emailVerificationPin, setEmailVerificationPin] = useState("")
+  const navigate = useNavigate();
+
+  const sendEmailOtp = async () => {
+    try {
+      const response = await axios.post(
+        "http://192.168.1.67:8081/auth/loginVerifyEmail",
+        {email }
+      );
+      console.log(response.data);
+      alert(response.data.message);
+    } catch (error) {
+      console.log("error are ", error);
+      alert("Failed to send OTP to email.");
+    }
+  };
+
+  const verifyEmailOtp = async () => {
+    try {
+      const response1 = await axios.post(
+        "http://192.168.1.67:8081/auth/loginVerifyEmailOtp",
+        { email, emailVerificationPin }
+      );
+      console.log(response1.data);
+      alert(response1.data.message);
+    } catch (error) {
+      console.log("error are ", error);
+      alert("Failed to verifiy email OTP.");
+    }
+  };
+
+  const signin = async () => {
+    try {
+      const response4 = await axios.post("http://192.168.1.67:8081/auth/login",{
+        email,emailVerificationPin
+      });
+      console.log(response4.data);
+      alert(response4.data.message);
+      navigate('/dashboard')
+    } catch (error) {
+      console.log("error are ", error);
+      alert("Failed to Signup...");
+    }
+  }
+
   return (
     <>
       <div className="card-container">
@@ -15,7 +62,7 @@ function SignIn() {
                   <div className="heading-text text-center">
                     <h1>Sign In</h1>
                     <p>
-                      New to our product?<Link to="/login">LogIn</Link>
+                      New to our product?<Link to="/superadmin">SuperAmin</Link>
                     </p>
                   </div>
                   <div className="form">
@@ -29,9 +76,13 @@ function SignIn() {
                             type="text"
                             className="custom-input-field"
                             id="email"
+                            value={email}
                             placeholder="Enter Email"
+                            onChange={(e) => {
+                              setEmail(e.target.value)
+                            }}
                           />
-                          <button className="verify-btn">Send</button>
+                          <button className="verify-btn" onClick={sendEmailOtp}>Send</button>
                         </div>
                       </div>
                       <div className="col-md-12">
@@ -46,9 +97,13 @@ function SignIn() {
                             type="text"
                             className="custom-input-field"
                             id="email-otp"
+                            value={emailVerificationPin}
                             placeholder="Enter Email Otp"
+                            onChange={(e) => {
+                              setEmailVerificationPin(e.target.value)
+                            }}
                           />
-                          <button className="verify-btn">Verify</button>
+                          <button className="verify-btn" onClick={verifyEmailOtp}>Verify</button>
                         </div>
                       </div>
                       <div className="col-md-12">
@@ -67,7 +122,7 @@ function SignIn() {
                         </div>
                       </div>
                       <div className="col-md-12 mt-4 mb-3">
-                        <button className="custom-btn">SignIn</button>
+                        <button className="custom-btn" onClick={signin}>SignIn</button>
                       </div>
                       <hr></hr>
                       <div className="heading-text text-center mt-1">
