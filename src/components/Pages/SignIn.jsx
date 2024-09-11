@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import google from "../assets/icon/google.svg";
-import facebook from "../assets/icon/facebook.svg";
+import google from '../../assets/icon/google.svg'
+import facebook from "../../assets/icon/facebook.svg";
 import axios from "axios";
 
 function SignIn() {

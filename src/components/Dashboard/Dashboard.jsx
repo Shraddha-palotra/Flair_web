@@ -1,17 +1,17 @@
 import React from "react";
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../HeaderDash/Header";
-import dollar from "../assets/icon/dollar.svg";
-import cart from '../assets/icon/cart.svg';
-import user1 from '../assets/icon/user.svg';
-import users from '../assets/icon/users.svg';
+import dollar from "../../assets/icon/dollar.svg";
+import cart from '../../assets/icon/cart.svg';
+import user1 from '../../assets/icon/user.svg';
+import users from '../../assets/icon/users.svg';
 
-function Dashboard() {
+function Dashboard({isOpen, setIsOpen}) {
   return (
     <>
       <div className="mainBody">
-        <Header />
-        <Sidebar />
+        <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}/>
         <div className="body_container">
           <h1>Dashboard</h1>
           <div className="dashbox">

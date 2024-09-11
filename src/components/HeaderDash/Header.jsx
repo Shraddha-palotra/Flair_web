@@ -1,42 +1,47 @@
 import React, { useEffect, useState } from "react";
-import flairlogo from "../assets/icon/flairlogo.svg";
-import search from "../assets/icon/search.svg";
-import countrylogo from "../assets/icon/countrylogo.svg";
-import notification from "../assets/icon/notification.svg";
-import avatar from "../assets/image/avatar.jpg";
+import flairlogo from "../../assets/icon/flairlogo.svg";
+import search from "../../assets/icon/search.svg";
+import countrylogo from "../../assets/icon/countrylogo.svg";
+import notification from "../../assets/icon/notification.svg";
+import avatar from "../../assets/image/avatar.jpg";
+import profile from '../../assets/icon/profile.svg';
+import account from '../../assets/icon/account.svg';
+import task from '../../assets/icon/task.svg';
+import logout from '../../assets/icon/logout.svg'
+import collapsebtn from '../../assets/icon/collapsbtn.svg'
 import { Link } from "react-router-dom";
 
-
-function Header() {
-
+function Header({ setIsOpen, isOpen }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [loggedUser, setLoggedUser] = useState({});
 
-  const openCollapsedHandler = () => {
-    setIsCollapsed(!isCollapsed);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
   };
 
+  const toggleDropdown = (e) => {
+    e.stopPropagation();
+    setIsCollapsed((prev) => !prev);
+  };
+  
   const closeHandler = (e) => {
-    if (!e.target.closest(".dropdown")) {
+    if (!e.target.closest(".profileDrop") && !e.target.closest(".avatar-container")) {
       setIsCollapsed(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", closeHandler);
-
     return () => {
       document.removeEventListener("mousedown", closeHandler);
     };
   }, []);
 
-
   const logOut = () => {
     window.localStorage.removeItem("user");
-    window.localStorage.removeItem('token');
+    window.localStorage.removeItem("token");
     setLoggedUser(null);
   };
-
 
   return (
     <>
@@ -48,6 +53,9 @@ function Header() {
                 <img src={flairlogo} alt="" />
                 <h5 className="fw-bolder m-2">Flair Web</h5>
               </div>
+            </div>
+            <div className="collaps-btn" onClick={toggleSidebar}>
+              <img src={collapsebtn} alt=""/>
             </div>
             <div className="search">
               <div className="searchlogo">
@@ -71,73 +79,38 @@ function Header() {
               <div className="notification">
                 <img src={notification} alt="" />
               </div>
-              <div className="avatar">
+              <div className="avatar-container" onClick={toggleDropdown}>
                 <img className="imgavatar" src={avatar} alt="" />
+                <h6 className="profile-name">{loggedUser.name || "Admin"}</h6>
               </div>
-              <h6>Admin</h6>
 
-              {/* <div className="profileDrop">
-                <ul>
-                  <li><button>Profile</button></li>
-                  <li><button>Account</button></li>
-                  <li><button>My Task</button></li>
-                  <li><button>Logout</button></li>
-                </ul>
-              </div> */}
-                <div className="avatar">
-                    <div className="dropdown">
-                      <span className="d-flex align-items-center cusProfileCir">
-                        <button
-                          className={`dropdown-toggle ${
-                            isCollapsed ? "show" : ""
-                          }`}
-                          type="button"
-                          id="dropdownMenuButton1"
-                          data-bs-toggle="dropdown"
-                          aria-expanded={isCollapsed ? "true" : "false"}
-                          onClick={openCollapsedHandler}
-                        >
-                          <img
-                            src={
-                              loggedUser?.profileImage
-                                ? `http://localhost:8080${loggedUser.profileImage}`
-                                : avatar
-                            }
-                            alt=""
-                          />
-                          <h6>
-                            {/* {loggedUser ? loggedUser.name : " "} */}
-                            {loggedUser?.name}
-                            <span>Admin</span>
-                          </h6>
-                        </button>
-                      </span>
-                      <ul
-                        className={`dropdown-menu ${isCollapsed ? "show" : ""}`}
-                        aria-labelledby="dropdownMenuButton1"
-                      >
-                        <li>
-                          <Link to="/profile" className="dropdown-item">
-                            Profile
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to="/change-password" className="dropdown-item">
-                            Change Password
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/login"
-                            className="dropdown-item"
-                            onClick={logOut}
-                          >
-                            Log Out
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+              {isCollapsed && (
+                <div className="profileDrop">
+                  <ul>
+                    <li>
+                      <Link to="/">
+                      
+                        <button><img src={profile} alt="" /> Profile</button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <button><img src={account} alt="" /> Account</button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/">
+                        <button> <img src={task} alt=""/> My Task</button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/signin">
+                        <button onClick={logOut}><img src={logout} alt=""/> Logout</button>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>
