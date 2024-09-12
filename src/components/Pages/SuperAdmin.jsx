@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SuperAdmin() {
   const [email, setEmail] = useState("");
@@ -122,11 +122,6 @@ function SuperAdmin() {
                         >
                           LogIn
                         </button>
-                      </div>
-                      <div>
-                        <p>
-                          <Link to="/dashboard">Dashboard</Link>
-                        </p>
                       </div>
                     </div>
                   </div>

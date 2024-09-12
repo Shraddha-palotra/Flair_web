@@ -4,44 +4,53 @@ import search from "../../assets/icon/search.svg";
 import countrylogo from "../../assets/icon/countrylogo.svg";
 import notification from "../../assets/icon/notification.svg";
 import avatar from "../../assets/image/avatar.jpg";
-import profile from '../../assets/icon/profile.svg';
-import account from '../../assets/icon/account.svg';
-import task from '../../assets/icon/task.svg';
-import logout from '../../assets/icon/logout.svg'
-import collapsebtn from '../../assets/icon/collapsbtn.svg'
-import { Link } from "react-router-dom";
+import profile from "../../assets/icon/profile.svg";
+import account from "../../assets/icon/account.svg";
+import task from "../../assets/icon/task.svg";
+import logout from "../../assets/icon/logout.svg";
+import collapsebtn from "../../assets/icon/collapsbtn.svg";
+import countrylogo2 from "../../assets/icon/countrylogo2.svg";
+import countrylogo3 from "../../assets/icon/countrylogo3.svg";
+import { useNavigate } from "react-router-dom";
 
 function Header({ setIsOpen, isOpen }) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [loggedUser, setLoggedUser] = useState({});
+  const navigate = useNavigate();
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
+  const [loggedUser, setLoggesUser] = useState({});
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
-  const toggleDropdown = (e) => {
-    e.stopPropagation();
-    setIsCollapsed((prev) => !prev);
+  const toggleDropdown = (type) => {
+    if (type === "profile") {
+      setIsProfileDropdownOpen((prev) => !prev);
+      setIsCountryDropdownOpen(false); // Close the country dropdown if open
+    } else if (type === "country") {
+      setIsCountryDropdownOpen((prev) => !prev);
+      setIsProfileDropdownOpen(false); // Close the profile dropdown if open
+    }
   };
-  
-  const closeHandler = (e) => {
-    if (!e.target.closest(".profileDrop") && !e.target.closest(".avatar-container")) {
-      setIsCollapsed(false);
+
+  const closeDropdowns = (e) => {
+    if (
+      !e.target.closest(".profileDrop") &&
+      !e.target.closest(".avatar-container") &&
+      !e.target.closest(".countrylogoDrop") &&
+      !e.target.closest(".countryflags")
+    ) {
+      setIsProfileDropdownOpen(false);
+      setIsCountryDropdownOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", closeHandler);
+    document.addEventListener("mousedown", closeDropdowns);
     return () => {
-      document.removeEventListener("mousedown", closeHandler);
+      document.removeEventListener("mousedown", closeDropdowns);
     };
   }, []);
-
-  const logOut = () => {
-    window.localStorage.removeItem("user");
-    window.localStorage.removeItem("token");
-    setLoggedUser(null);
-  };
 
   return (
     <>
@@ -55,7 +64,7 @@ function Header({ setIsOpen, isOpen }) {
               </div>
             </div>
             <div className="collaps-btn" onClick={toggleSidebar}>
-              <img src={collapsebtn} alt=""/>
+              <img src={collapsebtn} alt="" />
             </div>
             <div className="search">
               <div className="searchlogo">
@@ -73,40 +82,68 @@ function Header({ setIsOpen, isOpen }) {
           </div>
           <div className="hedarightSection">
             <div className="profile">
-              <div className="countrylogo">
+              <div
+                className="countryflags"
+                onClick={() => toggleDropdown("country")}
+              >
                 <img src={countrylogo} alt="" />
+                {isCountryDropdownOpen && (
+                  <div className="countrylogoDrop">
+                    <ul>
+                      <li>
+                        <button onClick={() => navigate("/notfound")}>
+                          <img src={countrylogo} alt="" />
+                          English(Global)
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => navigate("/notfound")}>
+                          <img src={countrylogo2} alt="" /> English
+                        </button>
+                      </li>
+                      <li>
+                        <button onClick={() => navigate("/notfound")}>
+                          {" "}
+                          <img src={countrylogo3} alt="" /> Bangla
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <div className="notification">
                 <img src={notification} alt="" />
               </div>
-              <div className="avatar-container" onClick={toggleDropdown}>
+              <div
+                className="avatar-container"
+                onClick={() => toggleDropdown("profile")}
+              >
                 <img className="imgavatar" src={avatar} alt="" />
                 <h6 className="profile-name">{loggedUser.name || "Admin"}</h6>
               </div>
-
-              {isCollapsed && (
+              {isProfileDropdownOpen && (
                 <div className="profileDrop">
                   <ul>
                     <li>
-                      <Link to="/">
-                      
-                        <button><img src={profile} alt="" /> Profile</button>
-                      </Link>
+                      <button onClick={() => navigate("/notfound")}>
+                        <img src={profile} alt="" /> Profile
+                      </button>
                     </li>
                     <li>
-                      <Link to="/">
-                        <button><img src={account} alt="" /> Account</button>
-                      </Link>
+                      <button onClick={() => navigate("/notfound")}>
+                        <img src={account} alt="" /> Account
+                      </button>
                     </li>
                     <li>
-                      <Link to="/">
-                        <button> <img src={task} alt=""/> My Task</button>
-                      </Link>
+                      <button onClick={() => navigate("/notfound")}>
+                        {" "}
+                        <img src={task} alt="" /> My Task
+                      </button>
                     </li>
                     <li>
-                      <Link to="/signin">
-                        <button onClick={logOut}><img src={logout} alt=""/> Logout</button>
-                      </Link>
+                      <button onClick={() => navigate("/logout")}>
+                        <img src={logout} alt="" /> Logout
+                      </button>
                     </li>
                   </ul>
                 </div>

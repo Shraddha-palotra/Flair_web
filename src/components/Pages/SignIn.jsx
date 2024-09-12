@@ -62,7 +62,7 @@ function SignIn() {
                   <div className="heading-text text-center">
                     <h1>Sign In</h1>
                     <p>
-                      New to our product?<Link to="/superadmin">SuperAmin</Link>
+                      New to our product?<Link to="/">SignUp</Link>
                     </p>
                   </div>
                   <div className="form">
