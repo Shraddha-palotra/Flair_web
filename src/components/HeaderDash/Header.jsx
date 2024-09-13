@@ -92,8 +92,7 @@ function Header({ setIsOpen, isOpen }) {
                     <ul>
                       <li>
                         <button onClick={() => navigate("/notfound")}>
-                          <img src={countrylogo} alt="" />
-                          English(Global)
+                          <img src={countrylogo} alt="" /> British
                         </button>
                       </li>
                       <li>
@@ -119,7 +118,10 @@ function Header({ setIsOpen, isOpen }) {
                 onClick={() => toggleDropdown("profile")}
               >
                 <img className="imgavatar" src={avatar} alt="" />
-                <h6 className="profile-name">{loggedUser.name || "Admin"}</h6>
+                <h6 className="profile-name">
+                  {loggedUser?.name || "Shraddha Palotra"}
+
+                </h6>
               </div>
               {isProfileDropdownOpen && (
                 <div className="profileDrop">
@@ -141,7 +143,7 @@ function Header({ setIsOpen, isOpen }) {
                       </button>
                     </li>
                     <li>
-                      <button onClick={() => navigate("/logout")}>
+                      <button onClick={() => navigate("/")}>
                         <img src={logout} alt="" /> Logout
                       </button>
                     </li>

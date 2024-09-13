@@ -1,19 +1,34 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import google from '../../assets/icon/google.svg'
+import google from "../../assets/icon/google.svg";
 import facebook from "../../assets/icon/facebook.svg";
 import axios from "axios";
 
 function SignIn() {
-  const [email,setEmail] = useState("");
-  const [emailVerificationPin, setEmailVerificationPin] = useState("")
+  const [email, setEmail] = useState("");
+  const [emailVerificationPin, setEmailVerificationPin] = useState("");
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateOtp = (otp) => {
+    return otp.length === 4 && /^\d+$/.test(otp);
+  };
+
   const sendEmailOtp = async () => {
+    if (!validateEmail(email)) {
+      setErrors({ email: "Please enter a valid email address" });
+      return;
+    }
+    setErrors({});
     try {
       const response = await axios.post(
         "http://192.168.1.67:8081/auth/loginVerifyEmail",
-        {email }
+        { email }
       );
       console.log(response.data);
       alert(response.data.message);
@@ -24,6 +39,12 @@ function SignIn() {
   };
 
   const verifyEmailOtp = async () => {
+    if (!validateOtp(emailVerificationPin)) {
+      setErrors({ emailVerificationPin: "Please enter a valid 4-digit OTP" });
+      return;
+    }
+    setErrors({});
+
     try {
       const response1 = await axios.post(
         "http://192.168.1.67:8081/auth/loginVerifyEmailOtp",
@@ -33,23 +54,41 @@ function SignIn() {
       alert(response1.data.message);
     } catch (error) {
       console.log("error are ", error);
-      alert("Failed to verifiy email OTP.");
+      alert("Failed to verify email OTP.");
     }
   };
 
   const signin = async () => {
+    const newErrors = {}; 
+  
+    // Validate email
+    if (!validateEmail(email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+  
+    // Validate OTP
+    if (!validateOtp(emailVerificationPin)) {
+      newErrors.emailVerificationPin = "Please enter a valid 4-digit OTP";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
     try {
-      const response4 = await axios.post("http://192.168.1.67:8081/auth/login",{
-        email,emailVerificationPin
+      const response4 = await axios.post("http://192.168.1.67:8081/auth/login", {
+        email,
+        emailVerificationPin,
       });
       console.log(response4.data);
       alert(response4.data.message);
-      navigate('/dashboard')
+      navigate("/dashboard");
     } catch (error) {
       console.log("error are ", error);
-      alert("Failed to Signup...");
+      alert("Failed to Sign in...");
     }
-  }
+  };
 
   return (
     <>
@@ -79,11 +118,16 @@ function SignIn() {
                             value={email}
                             placeholder="Enter Email"
                             onChange={(e) => {
-                              setEmail(e.target.value)
+                              setEmail(e.target.value);
                             }}
                           />
-                          <button className="verify-btn" onClick={sendEmailOtp}>Send</button>
+                          <button className="verify-btn" onClick={sendEmailOtp}>
+                            Send
+                          </button>
                         </div>
+                        {errors.email && (
+                          <p className="error-text">{errors.email}</p>
+                        )}
                       </div>
                       <div className="col-md-12">
                         <label
@@ -100,11 +144,21 @@ function SignIn() {
                             value={emailVerificationPin}
                             placeholder="Enter Email Otp"
                             onChange={(e) => {
-                              setEmailVerificationPin(e.target.value)
+                              setEmailVerificationPin(e.target.value);
                             }}
                           />
-                          <button className="verify-btn" onClick={verifyEmailOtp}>Verify</button>
+                          <button
+                            className="verify-btn"
+                            onClick={verifyEmailOtp}
+                          >
+                            Verify
+                          </button>
                         </div>
+                        {errors.emailVerificationPin && (
+                          <p className="error-text">
+                            {errors.emailVerificationPin}
+                          </p>
+                        )}
                       </div>
                       <div className="col-md-12">
                         <div className="form-check">
@@ -122,14 +176,16 @@ function SignIn() {
                         </div>
                       </div>
                       <div className="col-md-12 mt-4 mb-3">
-                        <button className="custom-btn" onClick={signin}>SignIn</button>
+                        <button className="custom-btn" onClick={signin}>
+                          SignIn
+                        </button>
                       </div>
                       <hr></hr>
                       <div className="heading-text text-center mt-1">
                         <p>Or sign in using: </p>
                       </div>
                       <div className="custom-btn1 col-md-12 mt-2 text-center">
-                        <button className="btn">
+                        <button className="btn1">
                           <Link>
                             <img className="me-1" src={google} alt="" />{" "}
                             Continue with Google
@@ -137,7 +193,7 @@ function SignIn() {
                         </button>
                       </div>
                       <div className="custom-btn1 col-md-12 mt-2 text-center">
-                        <button className="btn">
+                        <button className="btn1">
                           <Link>
                             {" "}
                             <img className="me-1" src={facebook} alt="" />{" "}

@@ -6,7 +6,6 @@ import SignIn from "./components/Pages/SignIn.jsx"
 import Dashboard from './components/Dashboard/Dashboard.jsx';
 import SuperAdmin from './components/Pages/SuperAdmin.jsx';
 import NotFound from './components/Pages/NotFound.jsx';
-// import Logout from './components/Pages/Logout.jsx';
 function App() {
   const [isOpen ,setIsOpen ] = useState(false)
 
@@ -20,7 +19,6 @@ function App() {
     <Route path='/superadmin' element={<SuperAdmin/>} />
     <Route path='/dashboard' element={<Dashboard isOpen={isOpen} setIsOpen={setIsOpen}/>} />
     <Route path='/notfound' element={<NotFound/>} />
-    {/* <Route path='logout' element={<Logout/>} /> */}
   </Routes>
     </>
   );

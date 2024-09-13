@@ -55,21 +55,26 @@ body{
   padding: 10px;
   background-color: #f0f3f8;
   border-radius: 5px;
+  width: 100%;
+  height: 100%;
+
 }
 
 .custom-btn1:hover {
   background-color: #dde7f8;
 }
 
-.btn {
+.btn1 {
   width: 100%;
   height: 100%;
+  border: none !important;
 }
-.btn:hover {
-  border-color: #066eff;
+.btn1:hover {
+  background-color: #dde7f8;
 }
 
-for country code .input-group {
+/* for country code  */
+.input-group {
   display: flex;
   align-items: center;
 }
@@ -483,7 +488,7 @@ for country code .input-group {
 }
 
 
-/* Logout.css */
+/* Logout.css
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -547,4 +552,11 @@ p {
 
 .btn-yes:hover {
   background: darkgreen;
+} */
+
+.error-text {
+  color: red;
+  font-size: 0.875rem; 
+  margin-top: 0.25rem;  
+  font-weight: 500;     
 }
